@@ -1,0 +1,21 @@
+curl -X POST \
+  https://api.Webex.com/WBXService/XMLService \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/xml' \
+  -d '<serv:message xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance">
+  <header>
+    <securityContext>
+        <WebexID>devasc</WebexID>
+        <password>Kc5Ac4M1</password>
+        <siteName>apidemoeu</siteName>
+    </securityContext>
+  </header>
+  <body>
+    <bodyContent
+      xsi:type="java:com.Webex.service.binding.meeting.LstsummaryMeeting">
+      <order>
+        <orderBy>STARTTIME</orderBy>
+      </order>
+    </bodyContent>
+  </body>
+</serv:message>'

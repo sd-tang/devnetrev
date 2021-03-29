@@ -1,0 +1,24 @@
+curl -X POST \
+  https://api.Webex.com/WBXService/XMLService \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/xml' \
+  -d '<?xml version="1.0" encoding="UTF-8"?>
+<serv:message xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <header>
+        <securityContext>
+            <WebexID>devasc</WebexID>
+            <password>Kc5Ac4M1</password>
+            <siteName>apidemoeu</siteName>
+        </securityContext>
+    </header>
+    <body>
+        <bodyContent xsi:type="java:com.Webex.service.binding.meeting.CreateMeeting">
+            <metaData>
+                <confName>Branding Meeting</confName>
+            </metaData>
+            <schedule>
+                <startDate/>
+            </schedule>
+        </bodyContent>
+    </body>
+</serv:message>'
