@@ -1,0 +1,104 @@
+/* This is an example YANG data model, written for practice and familiarisation
+purpose. It is copied from DEVASC OCG, with added comments.
+
+Contents of "bogus-interfaces.yang" */
+
+// This document creates a Module called bogus-interfaces
+module bogus-interfaces {
+    // Header Information section
+    namespace "http://bogus.example.com/interfaces";
+    prefix "bogus";  // prefix is used as a 'shortcut' call
+    organization "Bogus Inc.";
+    contact "chris@bogus.example.com";
+    description
+        "The module for entities implementing the Bogus interfaces."
+
+    // Imports & Includes section
+    // Importing modules saves us time from redefining new types
+    import "ietf-yang-types" {  // This module imports other module as reference
+        prefix yang;
+    }
+
+    // Type Definitions section (optional)
+    typedef percent {
+        type uint16 {
+            range "0 .. 100";
+        }
+        Description "Percentage";
+    }
+
+    // Configuration & Operational Data Declarations section
+    // Use a container to group related nodes within a subtree
+    container interfaces {
+        leaf intf-name {
+            type string;
+            desciption "Name of the interface";
+        }
+
+        leaf-list trunk-interfaces {
+            type string;
+            description "List of trunk interfaces";
+        }
+
+        // A container within a container is possible too (sub-container)
+        container statistics {
+            description "A collection of interface statistics.";
+            leaf in-octets {
+                // prefix "yang" is used to call the "ietf-yang-types" module
+                type yang:counter64;
+                description "Total number of octets received on the interface."
+            }
+
+            leaf in-errors {
+                type yang:counter32;
+                description "Number of inbound packets that contained errors."
+            }
+
+            leaf out-octets {
+                type yang:counter64;
+                description "Total number of octets sent out on the interface."
+            }
+
+            leaf out-errors {
+                type yang:counter32;
+                description "Number of outbound packets that contained errors."
+            }
+        }
+
+        // A list within a container
+        list user {
+            // leaf "name" is used as unique identifier
+            key name;
+            leaf name {
+                type string;
+            }
+            leaf uid {
+                type uint32;
+            }
+            leaf full-name {
+                type string;
+            }
+        }
+    }
+
+    // Action (RPC) section
+    /* This section is for defining additional RPC actions that are not found in 
+    the standard NETCONF RPCs such as <get-config> and <edit-config>.
+    This module does not need any additional RPCs, so we leave it empty */
+
+    // Notification Declarations section
+    /* NETCONF support notification messages, similar to SNMP traps. */
+    notification config-change {
+        description "The configuration has been changed.";
+        // It takes only one argument, which is the identifier
+        leaf operator-name {
+            type string;
+        }
+
+        // Returns a block of data statements containing detailed notification
+        leaf-list change {
+            type instance-identifier;
+        }
+    }
+
+}
