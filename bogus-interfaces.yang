@@ -11,7 +11,7 @@ module bogus-interfaces {
     organization "Bogus Inc.";
     contact "chris@bogus.example.com";
     description
-        "The module for entities implementing the Bogus interfaces."
+        "The module for entities implementing the Bogus interfaces.";
 
     // Imports & Includes section
     // Importing modules saves us time from redefining new types
@@ -46,22 +46,22 @@ module bogus-interfaces {
             leaf in-octets {
                 // prefix "yang" is used to call the "ietf-yang-types" module
                 type yang:counter64;
-                description "Total number of octets received on the interface."
+                description "Total number of octets received on the interface.";
             }
 
             leaf in-errors {
                 type yang:counter32;
-                description "Number of inbound packets that contained errors."
+                description "Number of inbound packets that contained errors.";
             }
 
             leaf out-octets {
                 type yang:counter64;
-                description "Total number of octets sent out on the interface."
+                description "Total number of octets sent out on the interface.";
             }
 
             leaf out-errors {
                 type yang:counter32;
-                description "Number of outbound packets that contained errors."
+                description "Number of outbound packets that contained errors.";
             }
         }
 
